@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+user1 = User.create(name: "John Doe", email: "john.doe@example.com")
+user2 = User.create(name: "Jane Smith", email: "jane.smith@example.com")
+user3 = User.create(name: "Admin User", email: "admin@example.com")
+
+basic_package = Package.create(name: "Basic", price: 10.00)
+pro_package = Package.create(name: "Pro", price: 50.00)
+enterprise_package = Package.create(name: "Enterprise", price: 500.00)
+
+Order.create(order_date: Time.now, user_id: user1.id, payment_status: "paid", total_amount: basic_package.price)
+Order.create(order_date: Time.now - 1.day, user_id: user1.id, payment_status: "unpaid", total_amount: pro_package.price)
+Order.create(order_date: Time.now - 2.days, user_id: user2.id, payment_status: "paid", total_amount: enterprise_package.price)
+Order.create(order_date: Time.now - 3.days, user_id: user3.id, payment_status: "refunded", total_amount: basic_package.price)
