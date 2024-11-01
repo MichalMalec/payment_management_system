@@ -1,5 +1,4 @@
 class Package < ApplicationRecord
-  PACKAGES = %w(10 50 500).freeze
-
-  validates :name, inclusion: { in: PACKAGES }
+  validates :name, presence: true, uniqueness: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end
