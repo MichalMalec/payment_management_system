@@ -11,7 +11,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const stripe = Stripe("pk_test_51QCoES2MhlPejvlaI4AwOZhfEJomIYzgw1ZehVHP0cKt3VpzqQRP9BCYAyJodlv10Ownc6Vmh3AzdAZu8TJBwqkd004Mw2i7z6");
+    const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :publishable_key) %>");
 
     document.querySelectorAll("button").forEach(button => {
       button.addEventListener("click", async (e) => {

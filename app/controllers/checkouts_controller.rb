@@ -1,6 +1,5 @@
 class CheckoutsController < ApplicationController
   def create
-    Stripe.api_key = 'sk_test_51QCoES2MhlPejvla8Mwfu3YsFyAdX1B4I11kUNwJAnlxvcsZ2nikibCnbo6HmCLs0WxrEJdc53VSLecKfwCtMeUM00RsSsihlB'
     # tbd
     user = User.first
 
