@@ -1,0 +1,42 @@
+
+
+<h2>Choose subscription plan:</h2>
+
+<% @packages.each do |package| %>
+  <button id="subscription-button" data-plan="<%= package.name %>">
+    <%= package.name %>: $<%= package.price %>/month
+  </button>
+<% end %>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const stripe = Stripe("<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>");
+
+    document.querySelectorAll("button").forEach(button => {
+      button.addEventListener("click", async (e) => {
+        const plan = e.target.getAttribute("data-plan");
+
+        const response = await fetch("/checkout/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+          },
+          body: JSON.stringify({ plan: plan })
+        });
+
+        const session = await response.json();
+
+        const { error } = await stripe.redirectToCheckout({
+          sessionId: session.id
+        });
+
+        if (error) {
+          alert(error.message);
+        }
+      });
+    });
+  });
+</script>
+
