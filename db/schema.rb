@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_03_181315) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_03_182303) do
   create_table "orders", force: :cascade do |t|
     t.datetime "order_date"
     t.integer "user_id", null: false
@@ -18,6 +18,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_181315) do
     t.float "total_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "package_id"
+    t.string "stripe_session_id"
+    t.string "status"
+    t.index ["package_id"], name: "index_orders_on_package_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -36,5 +40,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_181315) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "orders", "packages"
   add_foreign_key "orders", "users"
 end
