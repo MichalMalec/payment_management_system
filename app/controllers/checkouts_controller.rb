@@ -24,6 +24,10 @@ class CheckoutsController < ApplicationController
 
     # Create order in db
     order = user.orders.create(
+      order_date: Time.now,
+      user_id: user.id,
+      payment_status: 'paid',
+      total_amount: package.price,
       package: package,
       stripe_session_id: session.id,
       status: 'pending'

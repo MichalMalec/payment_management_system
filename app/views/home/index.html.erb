@@ -1,0 +1,25 @@
+<h2>History of orders</h2>
+
+<% if @orders.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Date of order</th>
+        <th>Amount of payment</th>
+        <th>Payment status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td>$<%= order.total_amount %></td>
+          <td><%= order.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No data to display.</p>
+<% end %>
+
