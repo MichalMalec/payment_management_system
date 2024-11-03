@@ -1,6 +1,7 @@
 class CheckoutsController < ApplicationController
   def create
     Stripe.api_key = 'sk_test_51QCoES2MhlPejvla8Mwfu3YsFyAdX1B4I11kUNwJAnlxvcsZ2nikibCnbo6HmCLs0WxrEJdc53VSLecKfwCtMeUM00RsSsihlB'
+    # tbd
     user = User.first
 
     package = Package.find_by(name: params[:plan])
@@ -32,6 +33,11 @@ class CheckoutsController < ApplicationController
       stripe_session_id: session.id,
       status: 'pending'
     )
+
+    # send email if order was saved
+    if order.persisted?
+      OrderMailer.payment_confirmation(order).deliver_now
+    end
 
     render json: { id: session.id }
   end

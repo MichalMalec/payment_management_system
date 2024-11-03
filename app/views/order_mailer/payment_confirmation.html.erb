@@ -1,0 +1,10 @@
+<h1>Payment Confirmation</h1>
+<p>Thank you for paying!</p>
+<p>Details of your order:</p>
+<ul>
+  <li><strong>Order number:</strong> <%= @order.id %></li>
+  <li><strong>Amount:</strong> $<%= @order.package.price %></li>
+  <li><strong>Status:</strong> <%= @order.status %></li>
+  <li><strong>Date of order:</strong> <%= @order.created_at.strftime("%Y-%m-%d %H:%M") %></li>
+</ul>
+<p>See you soon!</p>
