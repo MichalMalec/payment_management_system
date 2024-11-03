@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get 'subscriptions/new', to: 'subscriptions#new'
+  post 'checkout/create', to: 'checkouts#create'
 end

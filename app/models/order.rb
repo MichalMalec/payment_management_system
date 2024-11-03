@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
+  belongs_to :package
 
   validates :order_date, presence: true
   validates :payment_status, presence: true, inclusion: { in: %w[unpaid paid] }
