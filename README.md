@@ -6,6 +6,9 @@ Setup test data:
 Run app:
 `bin/rails s`
 
+Start flow under:
+`http://127.0.0.1:3000/subscriptions/new`
+
 Testing webhooks:
 1. Make sure server is running locally
 2. Install and run ngrok (for tunneling local url):
