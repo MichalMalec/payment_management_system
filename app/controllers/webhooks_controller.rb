@@ -27,7 +27,7 @@ class WebhooksController < ApplicationController
     private
 
     def handle_successful_payment(session)
-      order = Order.find_by(stripe_session_id: session['id'])
+      order = Order.find_by(stripe_session_id: session["id"])
       return unless order
 
       order.update(status: "completed")
@@ -37,7 +37,7 @@ class WebhooksController < ApplicationController
     end
 
     def handle_failed_payment(invoice)
-      order = Order.find_by(stripe_invoice_id: invoice.id)
+      order = Order.find_by(stripe_session_id: invoice["id"])
       return unless order
 
       order.update(status: "failed")
