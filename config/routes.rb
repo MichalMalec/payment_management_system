@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root 'home#index'
+  root "home#index"
 
-  get 'subscriptions/new', to: 'subscriptions#new'
-  post 'checkout/create', to: 'checkouts#create'
+  get "subscriptions/new", to: "subscriptions#new"
+  post "checkout/create", to: "checkouts#create"
 
-  post '/webhooks/stripe', to: 'webhooks#receive'
+  post "/webhooks/stripe", to: "webhooks#receive"
 end

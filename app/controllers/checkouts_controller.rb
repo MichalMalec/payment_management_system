@@ -6,19 +6,19 @@ class CheckoutsController < ApplicationController
     package = Package.find_by(name: params[:plan])
 
     unless package
-      render json: { error: 'Incorrect plan' }, status: :unprocessable_entity
+      render json: { error: "Incorrect plan" }, status: :unprocessable_entity
       return
     end
 
     # Create session Stripe Checkout
     session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      line_items: [{
+      payment_method_types: [ "card" ],
+      line_items: [ {
         price: package.stripe_price_id,
         quantity: 1
-      }],
-      mode: 'subscription',
-      success_url: root_url + '?session_id={CHECKOUT_SESSION_ID}',
+      } ],
+      mode: "subscription",
+      success_url: root_url + "?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: root_url
     )
 
@@ -29,7 +29,7 @@ class CheckoutsController < ApplicationController
       total_amount: package.price,
       package: package,
       stripe_session_id: session.id,
-      status: 'pending'
+      status: "pending"
     )
 
     # send email if order was saved
@@ -40,4 +40,3 @@ class CheckoutsController < ApplicationController
     render json: { id: session.id }
   end
 end
-  
